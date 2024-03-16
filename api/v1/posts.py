@@ -85,7 +85,7 @@ async def _increase_views(ids: list[UUID]) -> list[Post]:
     response_model=list[PostResponse],
     status_code=status.HTTP_200_OK,
 )
-async def _increase_views(ids: list[UUID]) -> list[Post]:
+async def _increase_views_transaction(ids: list[UUID]) -> list[Post]:
     posts = []
     """
         Wrong way:

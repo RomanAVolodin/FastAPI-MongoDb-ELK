@@ -5,8 +5,8 @@ from beanie import Document
 
 # All database models must be imported here to be able to
 # initialize them on startup.
-from .post import Post
-from .comment import Comment
+from .post import Post  # noqa: F401
+from .comment import Comment  # noqa: F401
 
 DocType = TypeVar('DocType', bound=Document)
 

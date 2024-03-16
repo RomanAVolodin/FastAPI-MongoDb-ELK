@@ -1,7 +1,5 @@
 import logging
-import uuid
 from contextlib import asynccontextmanager
-from logging import config as logging_config
 
 import uvicorn
 from fastapi import FastAPI, Request
@@ -11,7 +9,6 @@ from motor.motor_asyncio import AsyncIOMotorClient
 
 from api import setup_routers
 from core.config import settings
-from core.context import ctx_request_id
 from db import mongo, init_db
 from core.logger import LOGGING, setup_root_logger
 from middleware.main import setup_middleware

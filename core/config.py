@@ -1,4 +1,4 @@
-from pydantic import MongoDsn, Field
+from pydantic import MongoDsn
 from pydantic_settings import BaseSettings
 
 
