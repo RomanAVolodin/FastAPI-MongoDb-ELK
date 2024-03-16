@@ -1,0 +1,7 @@
+sh.addShard("mongo_rs1/mongo_rs1_n1:27017,mongo_rs1_n2:27017")
+sh.addShard("mongo_rs2/mongo_rs2_n1:27017,mongo_rs2_n2:27017")
+sh.enableSharding("posts_db")
+db.createCollection("posts_db.posts")
+db.createCollection("posts_db.comments")
+sh.shardCollection("posts_db.posts", {"id": "hashed"})
+sh.shardCollection("posts_db.comments", {"post_id": "hashed"})
