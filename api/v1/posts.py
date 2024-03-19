@@ -95,7 +95,6 @@ async def _increase_views_transaction(ids: list[UUID]) -> list[Post]:
         await post.replace()
         posts.append(post)
     """
-
     async with await mongo.mongo_client.start_session() as session:
         async with session.start_transaction():
             for id in ids:
@@ -104,3 +103,24 @@ async def _increase_views_transaction(ids: list[UUID]) -> list[Post]:
                 await post.replace(session=session)
                 posts.append(post)
     return posts
+
+
+@router.get(
+    '/author/{authors_name}',
+    summary='Get all authors posts',
+    response_model=list[PostResponse],
+    status_code=status.HTTP_200_OK,
+)
+async def _get_authors_post(authors_name: str) -> list[Post]:
+    return await Post.find_many(Post.author.last_name == authors_name).to_list()
+
+
+@router.get(
+    '/statics/average-view',
+    summary='Get average views',
+    response_model=dict,
+    status_code=status.HTTP_200_OK,
+)
+async def _get_avg_views() -> dict:
+    avg = await Post.find().avg(Post.views)
+    return {'result': avg}

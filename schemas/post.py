@@ -12,6 +12,11 @@ class PostCreateDto(BaseModel):
     author: Author
 
 
+class Like(BaseModel):
+    created_at: datetime
+    author: Author
+
+
 class PostResponse(BaseModel):
     model_config = ConfigDict(from_attributes=True, arbitrary_types_allowed=True, populate_by_name=True)
 
@@ -24,3 +29,4 @@ class PostResponse(BaseModel):
     last_visit_at: datetime | None = None
     created_at: datetime
     author: Author
+    likes: list[Like] | None = None
